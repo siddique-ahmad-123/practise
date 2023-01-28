@@ -6,7 +6,7 @@ struct Node
 {
 int data;
 Node *next;
-}*first=NULL;
+}*first=NULL,*second=NULL,*third=NULL;
 
 void create(int A[],int n){
     int i;
@@ -20,6 +20,25 @@ void create(int A[],int n){
     for(i=1;i<n;i++){
         t=new Node;
         t->data=A[i];
+        t->next=NULL;
+        last->next=t;
+        last=t;
+    }
+
+
+}
+void create2(int B[],int n){
+    int i;
+    Node *t,*last;
+    second= new Node;
+    
+    second->data=B[0];
+    second->next=NULL;
+    last=second;
+
+    for(i=1;i<n;i++){
+        t=new Node;
+        t->data=B[i];
         t->next=NULL;
         last->next=t;
         last=t;
@@ -155,14 +174,27 @@ void ReverseByLinks(Node *p){
     first=q;
 }
 
+void concatenate(Node *p, Node*q){
+    third=p;
+    while(p->next!=NULL){
+        p=p->next;
+    }
+    p->next=q;
+}
+
 
 
 int main(){
     
     int A[]={3,2,9,6,5,8};
+    int B[]={1,2,3,42,52,6};
 
     create(A,6);
+    create2(B,6);
     display(first);
+    cout<<endl;
+    display(second);
+    cout<<endl<<endl;
 
    /* cout<<endl;
     cout<<add(first)<<endl;
@@ -183,11 +215,14 @@ int main(){
      cout<<endl;
      display(first);
      cout<<endl;
-     */
+     
     cout<<endl;
     ReverseByLinks(first);
     display(first);
+*/
 
+concatenate(first,second);
+display(third);
 
     return 0;
 }
