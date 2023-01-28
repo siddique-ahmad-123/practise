@@ -6,7 +6,7 @@ struct Node
 {
 int data;
 Node *next;
-}*first=NULL;
+}*first=NULL,*second=NULL,*third=NULL;
 
 void create(int A[],int n){
     int i;
@@ -16,6 +16,25 @@ void create(int A[],int n){
     first->data=A[0];
     first->next=NULL;
     last=first;
+
+    for(i=1;i<n;i++){
+        t=new Node;
+        t->data=A[i];
+        t->next=NULL;
+        last->next=t;
+        last=t;
+    }
+
+
+}
+void create2(int A[],int n){
+    int i;
+    Node *t,*last;
+    second= new Node;
+    
+    second->data=A[0];
+    second->next=NULL;
+    last=second;
 
     for(i=1;i<n;i++){
         t=new Node;
@@ -141,15 +160,66 @@ void Reverse(Node *p){
     }
 
 }
+void concatenate(Node *p, Node*q){
+    third=p;
+    while(p->next!=NULL){
+        p=p->next;
+    }
+    p->next=q;
+}
+
+void MergeSortedLinkedList(Node *p,Node *q){
+    Node *last;
+    
+    p=first;
+    q=second;
+    if(first->data<second->data){
+      last=third=first;
+      first=first->next;
+      third->next=NULL;
+    }
+    else
+    {
+        last=third=second;
+        second=second->next;
+        third->next=NULL;
+    }
+
+    while(first->next!=NULL && second->next!=NULL){
+        if(first->data<second->data){
+            last->next=first;
+            last=first;
+            first=first->next;
+            last->next=NULL;
+        }
+        else
+        {
+            last->next=second;
+            last=second;
+            second=second->next;
+            last->next=NULL;
+        }
+    }
+
+    if(first->next!=NULL)
+    last->next=first;
+
+    else
+    last->next=second;
+}
 
 
 
 int main(){
     
-    int A[]={3,2,9,6,5,8};
-
+    int A[]={3,4,9,11,12,13};
+     int B[]={2,7,8,14,15,18};
     create(A,6);
+    create2(B,6);
     display(first);
+    cout<<endl;
+    display(second);
+    cout<<endl<<endl;
 
    /* cout<<endl;
     cout<<add(first)<<endl;
@@ -165,11 +235,16 @@ int main(){
     cout<<endl;
     display(first);
      cout<<endl;
-     */
+     
      Reverse(first);
      cout<<endl;
      display(first);
 
+concatenate(first,second);
+display(third);
+*/
+MergeSortedLinkedList(first,second);
+display(third);
 
     return 0;
 }
