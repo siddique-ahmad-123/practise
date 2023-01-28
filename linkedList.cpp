@@ -142,6 +142,19 @@ void Reverse(Node *p){
 
 }
 
+void ReverseByLinks(Node *p){
+    Node *q=NULL;
+    Node *r=NULL;
+
+    while(p){
+        r=q;
+        q=p;
+        p=p->next;
+        q->next=r;
+    }
+    first=q;
+}
+
 
 
 int main(){
@@ -165,10 +178,15 @@ int main(){
     cout<<endl;
     display(first);
      cout<<endl;
-     */
+     
      Reverse(first);
      cout<<endl;
      display(first);
+     cout<<endl;
+     */
+    cout<<endl;
+    ReverseByLinks(first);
+    display(first);
 
 
     return 0;
