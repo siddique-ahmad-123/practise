@@ -160,20 +160,6 @@ void Reverse(Node *p){
     }
 
 }
-
-void ReverseByLinks(Node *p){
-    Node *q=NULL;
-    Node *r=NULL;
-
-    while(p){
-        r=q;
-        q=p;
-        p=p->next;
-        q->next=r;
-    }
-    first=q;
-}
-
 void concatenate(Node *p, Node*q){
     third=p;
     while(p->next!=NULL){
@@ -182,12 +168,55 @@ void concatenate(Node *p, Node*q){
     p->next=q;
 }
 
+void MergeSortedLinkedList(Node *p,Node *q){
+    Node *last=NULL;
+    
+    p=first;
+    q=second;
+    if(first->data<second->data){
+      third=last=first;
+      first=first->next;
+      third->next=NULL;
+    }
+    else
+    {
+        third=last=second;
+        second=second->next;
+        third->next=NULL;
+    }
+
+    while(first->next!=NULL && second->next!=NULL){
+        if(first->data<second->data){
+            last->next=first;
+            last=first;
+            first=first->next;
+            last->next=NULL;
+        }
+        else
+        {
+            last->next=second;
+            last=second;
+            second=second->next;
+            last->next=NULL;
+        }
+    }
+
+    if(first->next!=NULL)
+    last->next=first;
+
+    if(second->next!=NULL)
+    last->next=second;
+}
+
+
+
+
 
 
 int main(){
     
-    int A[]={3,2,9,6,5,8};
-    int B[]={1,2,3,42,52,6};
+    int A[]={2,3,15,116,225,338};
+    int B[]={1,12,13,42,52,990};
 
     create(A,6);
     create2(B,6);
@@ -219,9 +248,13 @@ int main(){
     cout<<endl;
     ReverseByLinks(first);
     display(first);
-*/
+
 
 concatenate(first,second);
+display(third);
+*/
+
+MergeSortedLinkedList(first,second);
 display(third);
 
     return 0;
