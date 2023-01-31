@@ -160,6 +160,18 @@ void Reverse(Node *p){
     }
 
 }
+
+void Reverse2(Node *p){
+    Node *q=NULL;
+    Node  *r=NULL;
+    while(p){
+        r=q;
+        q=p;
+        p=p->next;
+        q->next=r;
+    }
+    first=q;
+}
 void concatenate(Node *p, Node*q){
     third=p;
     while(p->next!=NULL){
@@ -254,8 +266,11 @@ concatenate(first,second);
 display(third);
 */
 
-MergeSortedLinkedList(first,second);
-display(third);
+//MergeSortedLinkedList(first,second);
+//display(third);
+
+Reverse2(first);
+display(first);
 
     return 0;
 }
